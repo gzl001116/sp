@@ -24,6 +24,6 @@
   "dependencies": {
     "video.js": "^8.16.1",
     "videojs-contrib-ads": "^6.9.0",
-    "videojs-ima": "^1.11.1"
+    "videojs-ima": "^1.11.0"
   }
 }
