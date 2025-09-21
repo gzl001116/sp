@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video.js VAST Player</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Video.js VAST Player</h1>
+        
+        <video-js
+            id="my-video"
+            class="vjs-default-skin vjs-big-play-centered"
+            controls
+            preload="auto"
+            width="800"
+            height="450"
+            data-setup="{}">
+            <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+            <p class="vjs-no-js">
+                要观看此视频，请启用JavaScript，并考虑升级到支持HTML5视频的Web浏览器。
+            </p>
+        </video-js>
+    </div>
+
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs-contrib-ads.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/1.11.1/videojs.ima.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

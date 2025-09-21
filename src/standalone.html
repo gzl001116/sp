@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video.js VAST Player</title>
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .video-js {
+            margin: 0 auto;
+        }
+
+        .vjs-default-skin .vjs-big-play-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(0, 0, 0, 0.7);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            line-height: 80px;
+        }
+
+        .vjs-default-skin:hover .vjs-big-play-button,
+        .vjs-default-skin .vjs-big-play-button:focus {
+            background: rgba(0, 0, 0, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Video.js VAST Player</h1>
+        
+        <video-js
+            id="my-video"
+            class="vjs-default-skin vjs-big-play-centered"
+            controls
+            preload="auto"
+            width="800"
+            height="450"
+            data-setup="{}">
+            <source src="https://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+            <p class="vjs-no-js">
+                要观看此视频，请启用JavaScript，并考虑升级到支持HTML5视频的Web浏览器。
+            </p>
+        </video-js>
+    </div>
+
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/6.9.0/videojs-contrib-ads.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/1.11.1/videojs.ima.min.js"></script>
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取视频播放器元素
+            var player = videojs('my-video', {
+                autoplay: false,
+                controls: true,
+                responsive: true,
+                fluid: true
+            });
+
+            // 启用videojs-contrib-ads插件
+            player.ads();
+
+            // 配置VAST广告选项
+            var adOptions = {
+                // 使用Google示例广告VAST标签
+                adTagUrl: 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/ad_rule_samples&ciu_szs=300x250&ad_rule=1&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ar%3Dpremidpost&cmsid=496&vid=short_onecue&correlator=',
+                debug: true
+            };
+
+            // 初始化IMA插件
+            player.ima(adOptions);
+
+            // 在播放前请求广告
+            player.on('ready', function() {
+                // 初始化广告显示容器
+                player.ima.initializeAdDisplayContainer();
+                
+                // 请求广告
+                player.ima.requestAds();
+            });
+
+            // 监听广告事件
+            player.on('adsready', function() {
+                console.log('广告准备就绪');
+            });
+
+            player.on('adstart', function() {
+                console.log('广告开始播放');
+            });
+
+            player.on('adend', function() {
+                console.log('广告播放结束');
+            });
+
+            player.on('contentresume', function() {
+                console.log('内容恢复播放');
+            });
+
+            player.on('contentpause', function() {
+                console.log('内容暂停播放');
+            });
+        });
+    </script>
+</body>
+</html>
