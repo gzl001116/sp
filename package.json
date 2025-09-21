@@ -22,7 +22,7 @@
     "serve": "^14.2.0"
   },
   "dependencies": {
-    "video.js": "^8.16.1",
+    "video.js": "^7.21.0",
     "videojs-contrib-ads": "^6.9.0",
     "videojs-ima": "^1.11.0"
   }
