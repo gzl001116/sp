@@ -28,6 +28,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./src
-        # 针对项目页面，而非用户/组织页面
-        destination_dir: sp
+        publish_dir: .
